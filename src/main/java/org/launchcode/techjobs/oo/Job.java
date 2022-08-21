@@ -51,6 +51,10 @@ public class Job {
         return location;
     }
 
+    public int getId() {
+        return id;
+    }
+
     public void setLocation(Location location) {
         this.location = location;
     }
@@ -86,7 +90,12 @@ public class Job {
 
     @Override
     public String toString() {
-        return String.format("\nName: %s\nEmployer: %s \nLocation: %s \nPosition Type: %s \nCore Competency: %s \n", this.getName(), this.getEmployer().toString(),this.getLocation().toString(),this.getPositionType().toString(),this.getCoreCompetency().toString());
+        return String.format("\nID: %d\n" +
+                "Name: %s\n" +
+                "Employer: %s\n" +
+                "Location: %s\n" +
+                "Position Type: %s\n" +
+                "Core Competency: %s\n", this.id, this.getName(), this.getEmployer().toString(),this.getLocation().toString(),this.getPositionType().toString(),this.getCoreCompetency().toString());
     }
     // TODO: Add custom equals and hashCode methods. Consider two Job objects "equal" when their id fields
     //  match.
