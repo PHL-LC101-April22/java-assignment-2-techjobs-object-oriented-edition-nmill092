@@ -32,7 +32,7 @@ public class Job {
     }
 
     public String getName() {
-        return name;
+        return this.name == "" ? "Data not available" : name;
     }
 
     public void setName(String name) {
@@ -84,6 +84,10 @@ public class Job {
         return Objects.hash(id);
     }
 
+    @Override
+    public String toString() {
+        return String.format("\nName: %s\nEmployer: %s \nLocation: %s \nPosition Type: %s \nCore Competency: %s \n", this.getName(), this.getEmployer().toString(),this.getLocation().toString(),this.getPositionType().toString(),this.getCoreCompetency().toString());
+    }
     // TODO: Add custom equals and hashCode methods. Consider two Job objects "equal" when their id fields
     //  match.
 
