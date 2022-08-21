@@ -6,6 +6,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 import org.launchcode.techjobs.oo.Job;
 import org.launchcode.techjobs.oo.Employer;
@@ -45,8 +46,9 @@ public void testJobConstructorSetsAllFields() {
 public void testJobsForEquality() {
     Job job1 = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
     Job job2 = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
-    assertNotEquals(job1, job2);
-    assertEquals(false, job1.equals(job2));
+
+    assertFalse(job1.equals(job2));
+
 }
 
 @Test
@@ -60,23 +62,26 @@ public void testToStringStartsAndEndsWithNewLine() {
 @Test
 public void testToStringContainsCorrectLabelsAndData() {
     Job job1 = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
-    assertTrue(job1.toString().contains("Name"));
-    assertTrue(job1.toString().contains(job1.getName()));
-    assertTrue(job1.toString().contains("Employer"));
-    assertTrue(job1.toString().contains(job1.getEmployer().getValue()));
-    assertTrue(job1.toString().contains("Location"));
-    assertTrue(job1.toString().contains(job1.getLocation().getValue()));
-    assertTrue(job1.toString().contains("Position Type"));
-    assertTrue(job1.toString().contains(job1.getPositionType().getValue()));
-    assertTrue(job1.toString().contains("Core Competency"));
-    assertTrue(job1.toString().contains(job1.getCoreCompetency().getValue()));
+    String jobString = "\nID: 1\n" +
+            "Name: Product tester\n" +
+            "Employer: ACME\n" +
+            "Location: Desert\n" +
+            "Position Type: Quality control\n" +
+            "Core Competency: Persistence\n";
+    assertEquals(job1.toString(), jobString);
 }
 
 @Test
 public void testToStringHandlesEmptyField() {
-    Job job1 = new Job("", new Employer(""), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
-    assertEquals("Data not available",job1.getEmployer().toString());
-    assertEquals("Data not available",job1.getName());
+    Job job1 = new Job("Product tester", new Employer(""), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
+    String jobString = "\nID: 1\n" +
+            "Name: Product tester\n" +
+            "Employer: Data not available\n" +
+            "Location: Desert\n" +
+            "Position Type: Quality control\n" +
+            "Core Competency: Persistence\n";
+    assertEquals(jobString,job1.toString());
+    System.out.println(job1.toString());
 }
 
 }
